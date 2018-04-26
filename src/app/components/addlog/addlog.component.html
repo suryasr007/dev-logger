@@ -1,0 +1,15 @@
+<div class="jumbotron">
+  <form #logForm="ngForm" (ngSubmit)="onSubmit(logForm)">
+    <div class="form-group">
+      <input 
+      class="form-control" 
+      type="text" 
+      placeholder="Add the log"
+      name="logText"
+      [(ngModel)] = "logObj.logText" 
+      required>
+    </div>
+    <button [disabled]="!logForm.form.valid" class="btn btn-primary">Add</button>
+    <button [hidden]="!this.text" class="btn btn-info">Clear</button>    
+  </form>
+</div>
