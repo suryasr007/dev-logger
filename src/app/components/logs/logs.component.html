@@ -1,19 +1,25 @@
-<div *ngIf="!loaded"><i class="fa fa-spinner"></i></div>
+<div *ngIf="!loaded">Loading<i class="fa fa-spinner"></i></div>
 
-<div class="card" *ngFor="let log of logs; index as i">
-  <div class="card-body">
-    <div class="row" (click)="updateLog(log)">
-      <div class="col-8">
-        <a href="#">{{ log.logText }}</a>        
-      </div>
-      <div class="col-2">
-        {{ log.updated | date }} 
-      </div>
-      <div class="col-2">
-        <button (click)="onRemove(i)" type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button> 
+<div *ngIf="loaded && logs.length > 0">
+  <div class="card" *ngFor="let log of logs; index as i" [class.bg-light]="selectedLog === log">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-8">
+          <a (click)="onSelect(log)" href="#">{{ log.logText }}</a>        
+        </div>
+        <div class="col-2">
+          {{ log.updated | date }} 
+        </div>
+        <div class="col-2">
+          <button (click)="onRemove(i)" type="button" class="close" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button> 
+        </div> 
       </div> 
-    </div> 
+    </div>
   </div>
+</div>
+
+<div *ngIf="loaded && logs.length == 0">
+  <h5>There are no logs in the system.</h5>
 </div>
